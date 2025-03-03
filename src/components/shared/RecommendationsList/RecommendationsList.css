@@ -1,0 +1,13 @@
+/* RecommendationsList.css */
+::-webkit-scrollbar {
+    width: 8px; /* 设置滚动条的宽度 */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* 设置滚动条的颜色 */
+    border-radius: 10px; /* 设置滚动条的圆角 */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* 设置滚动条轨道的背景 */
+} 

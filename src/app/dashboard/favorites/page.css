@@ -1,0 +1,22 @@
+.fav-poi-wrap {
+    width: 200px;
+    color: #fff;
+    background: #333;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.fav-poi-wrap .poi-pos,.fav-poi-wrap .poi-type {
+    color: #8E8E8E;
+}
+.city-select-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.city-select-label {
+    color: #8E8E8E;
+}
+.city-select .ant-select-selector, .city-select .ant-select-arrow, .city-select .ant-select-selection-item {
+    color: #fff!important;
+}

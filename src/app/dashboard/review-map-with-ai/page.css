@@ -1,0 +1,66 @@
+.poi-info {
+    background: rgba(107, 114, 128, 0.1);
+    width: 240px;
+    position: absolute;
+    left: 480px;
+    top: 170px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.poi-card {
+    position: relative;
+}
+.poi-card .poi-content {
+    padding: 10px;
+}
+.poi-card .poi-name {
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+.poi-card .poi-name .poi-name-label {
+    /*width: 120px;*/
+}
+.poi-card .poi-name .rate {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+}
+.poi-card .poi-type {
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.poi-card .poi-pos {
+    font-size: 12px;
+}
+.poi-card .love {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.mySwiper {
+    width: 100%;
+    height: 160px;
+}
+
+.itinerary-generate {
+    background: rgba(107, 114, 128, 0.1);
+    width: 240px;
+    height: 66px;
+    position: absolute;
+    left: 480px;
+    bottom: 170px;
+    border-radius: 100px;
+}
