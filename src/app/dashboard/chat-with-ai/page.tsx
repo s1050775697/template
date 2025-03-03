@@ -45,7 +45,7 @@ const data = {
 
 const ChatWithAIPage = () => {
   const lastMessageRef: any = useRef<HTMLDivElement | null>(null);
-  const { responses, isAccessingChat, onChatWithAI } = useChatWithAi(true);
+  const { responses, isAccessingChat, onChatWithAI } = useChatWithAi();
   const { isSidebarToggled } = useAppStore((state) => state);
   const [input, setInput] = useState("");
 

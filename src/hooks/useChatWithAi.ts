@@ -7,7 +7,7 @@ import { extractLocations, getOpenAIEmbedding } from "@/utils/extractLocations";
 const API_KEY = process.env.NEXT_PUBLIC_ai_api_key;
 const BASE_API_URL = "/api";
 console.log("API_KEY :: ", API_KEY);
-const useChatWithAi = (autoInit?:boolean) => {
+const useChatWithAi = () => {
   const [thread, setThread] = useState<IGetThreadResponse>();
   const [responses, setResponses] = useState<{ user: string; text: string }[]>(
     []
@@ -15,10 +15,7 @@ const useChatWithAi = (autoInit?:boolean) => {
   const [isAccessingChat, setIsAccessingChat] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    if(autoInit){
-      onCreateNewThread();
-    }
-    
+    onCreateNewThread();
   }, []);
 
   const onCreateNewThread = async () => {
@@ -39,6 +36,7 @@ const useChatWithAi = (autoInit?:boolean) => {
       console.log("data :: ", data);
       setThread(data);
     }
+    return data
   };
 
   const onChatWithAI = async (content: string) => {
@@ -51,12 +49,13 @@ const useChatWithAi = (autoInit?:boolean) => {
         apiUrl: `${window.location.origin}/api`,
         apiKey: API_KEY,
       });
+      let newThread = thread;
 
       const assistants = await client.assistants.search();
       const agent = assistants[0];
       // If thread is not created yet, create it
-      if (!thread) {
-        const newThread = await client.threads.create();
+      if (!newThread) {
+        newThread = await onCreateNewThread();
         setThread(newThread as IGetThreadResponse);
       }
 
@@ -64,7 +63,7 @@ const useChatWithAi = (autoInit?:boolean) => {
       let aiResponse = ""; // Store the final AI response
 
       for await (const chunk of client.runs.stream(
-        thread?.thread_id || "",
+        newThread?.thread_id || "",
         agent.assistant_id,
         { input: { messages } }
       )) {
@@ -136,7 +135,7 @@ const useChatWithAi = (autoInit?:boolean) => {
   //   }
   // };
 
-  return { onChatWithAI,onCreateNewThread, responses, isAccessingChat };
+  return { onChatWithAI, responses, isAccessingChat };
 };
 export default useChatWithAi;
 // const onChatWithAI = async (content: string) => {

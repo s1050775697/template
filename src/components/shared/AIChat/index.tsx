@@ -21,7 +21,7 @@ interface AIChatProps {
 
 const AIChat: React.FC<AIChatProps> = ({ onApply, onAIResponse, userSearch }) => {
   const lastMessageRef: any = useRef<HTMLDivElement | null>(null);
-  const { responses, isAccessingChat, onChatWithAI,onCreateNewThread } = useChatWithAi();
+  const { responses, isAccessingChat, onChatWithAI } = useChatWithAi();
   const [input, setInput] = useState("");
   const [locations, setLocations] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
@@ -61,9 +61,7 @@ const AIChat: React.FC<AIChatProps> = ({ onApply, onAIResponse, userSearch }) =>
 
   useEffect(() => {
     console.log("userSearch :: ", userSearch);
-    onCreateNewThread().then(()=>{
-      onChatWithAI(userSearch);
-    })
+    onChatWithAI(userSearch);
     setInput("");
   }, [])
 
