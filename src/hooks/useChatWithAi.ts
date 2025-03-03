@@ -7,7 +7,7 @@ import { extractLocations, getOpenAIEmbedding } from "@/utils/extractLocations";
 const API_KEY = process.env.NEXT_PUBLIC_ai_api_key;
 const BASE_API_URL = "/api";
 console.log("API_KEY :: ", API_KEY);
-const useChatWithAi = () => {
+const useChatWithAi = (autoInit?:boolean) => {
   const [thread, setThread] = useState<IGetThreadResponse>();
   const [responses, setResponses] = useState<{ user: string; text: string }[]>(
     []
@@ -15,7 +15,10 @@ const useChatWithAi = () => {
   const [isAccessingChat, setIsAccessingChat] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    onCreateNewThread();
+    if(autoInit){
+      onCreateNewThread();
+    }
+    
   }, []);
 
   const onCreateNewThread = async () => {
@@ -133,7 +136,7 @@ const useChatWithAi = () => {
   //   }
   // };
 
-  return { onChatWithAI, responses, isAccessingChat };
+  return { onChatWithAI,onCreateNewThread, responses, isAccessingChat };
 };
 export default useChatWithAi;
 // const onChatWithAI = async (content: string) => {
