@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import useTrips from "@/hooks/useTrips";
@@ -19,6 +19,7 @@ const tabs = [
 ];
 const PlanTrip = () => {
   const router = useRouter();
+  const citiesSuggestionRef = useRef<any>(null);
   const { placeNewTrip, trips, isLoading } = useTrips();
   const { user } = useAuthStore((state) => state);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
@@ -47,7 +48,7 @@ const PlanTrip = () => {
       travelers: travelers?.toString() || '',
       budgetMin: budgetMin?.toString() || '',
       budgetMax: budgetMax?.toString() || '',
-      searchCity: searchValue || ''
+      searchCity: citiesSuggestionRef.current.getSelectedCities()?.map((city:any)=>city.name).join(',') || ''
     });
 
     router.push(`${APP_ROUTES.REVIEW_MAP_WITH_AI}?${params.toString()}`);
@@ -160,7 +161,7 @@ const PlanTrip = () => {
       {tab?.id === 1 ? (
         <>
           <section className="border-[1px] border-secondary rounded-[30px] py-6 px-4 flex justify-between items-center my-9">
-            <CitiesSuggestion onSearchChange={setSearchValue} />
+            <CitiesSuggestion ref={citiesSuggestionRef} onSearchChange={setSearchValue} />
 
             {/* <Button
               onClick={() =>

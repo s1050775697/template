@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,forwardRef,useImperativeHandle } from "react";
 import Image from "next/image";
 import { chineseCities } from "@/typescript/data";
 import { TCities } from "@/types/maps";
@@ -11,7 +11,7 @@ interface CitiesSuggestionProps {
   onSearchChange?: (value: string) => void;
 }
 
-const CitiesSuggestion = ({ onSearchChange }: CitiesSuggestionProps) => {
+const CitiesSuggestion = ({ onSearchChange }: CitiesSuggestionProps,ref:any) => {
   const {
     selectedCities,
     setPlaces,
@@ -43,7 +43,11 @@ const CitiesSuggestion = ({ onSearchChange }: CitiesSuggestionProps) => {
   //   });
   //   removeCity(city);
   // };
-
+  useImperativeHandle(ref, () => ({
+    getSelectedCities: () => {
+      return selectedCities;
+    },
+  }));
   const handleCityRemove = (city: TCities) => {
     console.log("Removing city:", city.name);
     removeCity(city);
@@ -213,4 +217,4 @@ const CitiesSuggestion = ({ onSearchChange }: CitiesSuggestionProps) => {
   );
 };
 
-export default CitiesSuggestion;
+export default forwardRef(CitiesSuggestion);
